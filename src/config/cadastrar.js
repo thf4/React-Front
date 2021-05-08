@@ -1,0 +1,1 @@
+export const cad = "http://localhost:3000/cadastrar"
