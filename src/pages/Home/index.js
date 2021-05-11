@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Container, Alert } from "reactstrap";
+import { Link } from "react-router-dom";
 import { Table } from "reactstrap";
 import axios from "axios";
 import { api } from "../../config";
 
 export const Home = () => {
   const [data, setData] = useState([]);
-  const [ status, setStatus ] = useState({
-    type:"",
-    message:""
-  })
+  const [status, setStatus] = useState({
+    type: "",
+    message: "",
+  });
   const getDados = async () => {
     try {
-      await axios.get(api + "/listar").then((response) => {
-        setData(response.data.users)
-        
-      });
+      const response = await axios.get(api + "/listar");
+      setData(response.data.users);
     } catch (err) {
       setStatus({
-        type:"error",
-        message:"Error: tente mais tarde"
-      })
+        type: "error",
+        message: "Error: tente mais tarde",
+      });
     }
   };
   useEffect(() => {
     getDados();
-  });
+  }, []);
   return (
     <div>
       <Container>
@@ -39,9 +38,11 @@ export const Home = () => {
             </a>
           </div>
         </div>
-        < Alert color="danger">
-          {status.message}
-        </Alert>
+        {status.type === "error" ? (
+          <Alert color="danger">{status.message}</Alert>
+        ) : (
+          ""
+        )}
         <Table striped hover>
           <thead>
             <tr>
@@ -51,14 +52,17 @@ export const Home = () => {
               <th>Ação</th>
             </tr>
           </thead>
-          <tbody >
-            {data.map(item =>(
+          <tbody>
+            {data.map((item) => (
               <tr key={item._id}>
-              <td>{item._id}</td>
-              <td>{item.name}</td>
-              <td>{item.email}</td>
-              <td>{item.date}</td>
-            </tr>
+                <td>{item._id}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.date}</td>
+                <td><Link to={"/view/" + item._id} className="btn btn-success">
+                  Vizualizar
+                </Link></td>
+              </tr>
             ))}
           </tbody>
         </Table>

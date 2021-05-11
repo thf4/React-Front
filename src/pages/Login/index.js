@@ -7,6 +7,7 @@ import {
   Label,
   Input,
   Container,
+  Col
 } from "reactstrap";
 export const Login = (props) => {
 
@@ -14,7 +15,8 @@ export const Login = (props) => {
   return (
     <Container >
       <Form>
-        <Row>
+        <Row form>
+        <Col md={6}>
         <div className="mt-4 card-body">
           <FormGroup>
             <Label for="email" sm={10}>
@@ -35,6 +37,7 @@ export const Login = (props) => {
           </FormGroup>
           <Button className="btn btn-success mt-4"> Login </Button>
         </div>
+        </Col>
         </Row>
       </Form>
     </Container>

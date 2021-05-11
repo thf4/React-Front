@@ -74,7 +74,7 @@ export const Cadastrar = () => {
               </FormGroup>
             </Col>
           </Row>
-          <Button className="mt-4 btn btn-outline-success ">Sign in</Button>
+          <Button className="mt-4 btn btn-success ">Sign in</Button>
         </Container>
       </Form>
     </div>
